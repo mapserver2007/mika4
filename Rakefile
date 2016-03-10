@@ -13,7 +13,7 @@ end
 
 task:default => [:github_push, :heroku_deploy]
 
-task :github_push => [:spec] do
+task :github_push do
   sh 'git push origin master'
 end
 
