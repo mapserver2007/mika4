@@ -14,6 +14,15 @@ $> yo mika4
 
 アダプターは`slack`を指定する。
 
+## ローカル実行
+OSX
+
+```sh
+$> brew install redis
+$> redis-server /usr/local/etc/redis.conf
+$> bin/hubot --name mika4
+```
+
 ## Slack設定
 * アカウントおよびルームを作成する
 * [https://slack.com/apps](Browse Apps) > Hubot > Configurations on [your-team] > Edit configuration
