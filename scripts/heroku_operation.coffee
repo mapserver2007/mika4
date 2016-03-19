@@ -59,7 +59,7 @@ module.exports = (robot) ->
           msg.send "メール送れなかったよぉ"
         else
           msg.send "#{msg.match[1]}を#{msg.match[3]}するよぉ(｀・ω・´)"
-          async.retry {times: 10, interval: 7000}, getTask, (isError, data) ->
+          async.retry {times: 10, interval: 10000}, getTask, (isError, data) ->
             if isError == false
               switch data.status
                 when 0
