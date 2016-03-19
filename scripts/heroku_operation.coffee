@@ -33,13 +33,18 @@ module.exports = (robot) ->
 
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection}?apiKey=#{process.env.apikey}"
 
+    count = 0;
+    retryCount = 5
     getTask = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
           data = JSON.parse(body)
           if data.length == 0
-            msg.send "ちょっとまってね〜"
-            callback(true)
+            if ++count < retryCount
+              msg.send "ちょっとまってね〜"
+              callback(true)
+            else
+              msg.send "#{msg.match[3]失敗しちゃったかも}"
           else
             callback(false, data[0])
 
@@ -59,7 +64,7 @@ module.exports = (robot) ->
           msg.send "メール送れなかったよぉ"
         else
           msg.send "#{msg.match[1]}を#{msg.match[3]}するよぉ(｀・ω・´)"
-          async.retry {times: 10, interval: 10000}, getTask, (isError, data) ->
+          async.retry {times: retryCount, interval: 10000}, getTask, (isError, data) ->
             if isError == false
               switch data.status
                 when 0
