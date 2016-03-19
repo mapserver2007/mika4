@@ -33,10 +33,13 @@ module.exports = (robot) ->
 
     url = "https://api.mlab.com/api/1/databases/#{process.env.apikey}/collections/#{process.env.collection}?apiKey=#{process.env.apikey}"
 
+    console.log(url)
+
     getTask = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
           data = JSON.parse(body)
+          console.log(data)
           if data.length == 0
             msg.send "ちょっとまってね〜"
             callback(true)
