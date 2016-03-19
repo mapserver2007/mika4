@@ -31,15 +31,12 @@ module.exports = (robot) ->
       subject: "#{msg.match[1]} #{command}"
       text: "mika4"
 
-    url = "https://api.mlab.com/api/1/databases/#{process.env.apikey}/collections/#{process.env.collection}?apiKey=#{process.env.apikey}"
-
-    console.log(url)
+    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection}?apiKey=#{process.env.apikey}"
 
     getTask = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
           data = JSON.parse(body)
-          console.log(data)
           if data.length == 0
             msg.send "ちょっとまってね〜"
             callback(true)
@@ -54,7 +51,6 @@ module.exports = (robot) ->
             msg.send "エラーになっちゃったよぉ"
             msg.send "『#{error}』"
           else
-            console.log("init")
             callback()
 
     initTask ->
