@@ -33,7 +33,7 @@ module.exports = (robot) ->
 
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection}?apiKey=#{process.env.apikey}"
 
-    count = 0;
+    count = 0
     retryCount = 5
     getTask = (callback) ->
       msg.http(url)
