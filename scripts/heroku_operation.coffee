@@ -44,7 +44,7 @@ module.exports = (robot) ->
               msg.send "ちょっとまってね〜"
               callback(true)
             else
-              msg.send "#{msg.match[3]失敗しちゃったかも}"
+              msg.send "#{msg.match[3]}失敗しちゃったかも"
           else
             callback(false, data[0])
 
