@@ -29,7 +29,7 @@ module.exports = (robot) ->
     mail =
       to: process.env.MAIL_ADDRESS
       subject: "#{msg.match[1]} #{command}"
-      text: "mika4"
+      text: process.env.TRIGGER_KEY
 
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection}?apiKey=#{process.env.apikey}"
 

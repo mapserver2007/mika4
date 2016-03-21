@@ -1,3 +1,4 @@
 MAIL_SERVICE: mail service name
 MAIL_ADDRESS: your mail address
 MAIL_PASSWORD: your password
+TRIGGER_KEY: script execute trigger key
