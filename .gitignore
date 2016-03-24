@@ -4,3 +4,4 @@ node_modules
 config/slack.yml
 config/mail.yml
 config/mlab.yml
+config/tumblr.auth.yml

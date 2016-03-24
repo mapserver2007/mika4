@@ -5,6 +5,7 @@ config_files = [
   YAML.load_file(File.dirname(__FILE__) + "/config/hubot.yml"),
   YAML.load_file(File.dirname(__FILE__) + "/config/slack.yml"),
   YAML.load_file(File.dirname(__FILE__) + "/config/mail.yml"),
+  YAML.load_file(File.dirname(__FILE__) + "/config/tumblr.auth.yml"),
   YAML.load_file(File.dirname(__FILE__) + "/config/mlab.yml")
 ]
 
