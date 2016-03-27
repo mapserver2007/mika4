@@ -8,9 +8,9 @@ module.exports = (robot) ->
   robot.respond /(?:(.+)画像)はよ((?:\uFF01|!){0,})/i, (msg) ->
     maxCount = 4
     count = 1
-    if msg.match[1].length > 0
-      if msg.match[1].length <= maxCount
-        count = msg.match[1].length
+    if msg.match[2]
+      if msg.match[2].length <= maxCount
+        count = msg.match[2].length
       else
         count = maxCount
     limitMaxCount = 30
@@ -29,7 +29,7 @@ module.exports = (robot) ->
       parseInt Math.random() * list.length - 1, 10
 
     getImage = (config, imgNum) ->
-      return if imgNum >= count || limitCount > limitMaxCount
+      return if imgNum > count || limitCount > limitMaxCount
       id = config.id[getIndex config.id]
       tag = config.tag[getIndex config.tag]
       tumblr.photos(id + ".tumblr.com").random { tag: tag }, (post) ->
