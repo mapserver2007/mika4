@@ -1,7 +1,8 @@
 # Description:
-#   Get lovelive animation gif from tumblr
+#   Get image from tumblr
 # Commands:
-#   mika4
+#   mika4 (.+)画像はよ
+#   mika4 (.+)画像はよ!!
 
 tumblr = require "tumblrbot"
 
