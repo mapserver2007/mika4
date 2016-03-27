@@ -17,6 +17,8 @@ module.exports = (robot) ->
     limitCount = 1
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}?apiKey=#{process.env.apikey}"
 
+    console.log(url)
+
     getConfig = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
