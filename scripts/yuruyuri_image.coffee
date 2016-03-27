@@ -2,6 +2,7 @@
 #   Get lovelive animation gif from tumblr
 # Commands:
 #   mika4
+
 tumblr = require "tumblrbot"
 
 module.exports = (robot) ->
@@ -17,8 +18,6 @@ module.exports = (robot) ->
     limitCount = 1
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}?apiKey=#{process.env.apikey}"
 
-    console.log(url)
-
     getConfig = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
@@ -28,8 +27,6 @@ module.exports = (robot) ->
       parseInt Math.random() * list.length - 1, 10
 
     getImage = (config, imgNum) ->
-      console.log "imgNum:" + imgNum
-      console.log "limitCount:" + limitCount
       return if imgNum > count || limitCount > limitMaxCount
       id = config.id[getIndex config.id]
       tag = config.tag[getIndex config.tag]
