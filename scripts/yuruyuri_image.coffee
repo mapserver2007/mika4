@@ -15,20 +15,19 @@ module.exports = (robot) ->
         count = maxCount
     limitMaxCount = 30
     limitCount = 1
-
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}?apiKey=#{process.env.apikey}"
-    tagList = []
 
     getConfig = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
-          data = JSON.parse(body)
-          callback data
+          callback JSON.parse(body)
 
     getIndex = (list) ->
       parseInt Math.random() * list.length - 1, 10
 
     getImage = (config, imgNum) ->
+      console.log "imgNum:" + imgNum
+      console.log "limitCount:" + limitCount
       return if imgNum > count || limitCount > limitMaxCount
       id = config.id[getIndex config.id]
       tag = config.tag[getIndex config.tag]
@@ -41,6 +40,6 @@ module.exports = (robot) ->
 
     getConfig((configList) ->
       for config in configList
-        if (config.keyword == msg.match[1])
+        if config.keyword == msg.match[1]
           getImage config, 1
     )
