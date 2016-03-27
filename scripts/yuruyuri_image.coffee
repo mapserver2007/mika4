@@ -3,34 +3,44 @@
 # Commands:
 #   mika4
 tumblr = require "tumblrbot"
-yaml = require "js-yaml"
-fs = require "fs";
 
 module.exports = (robot) ->
-  robot.respond /(?:ゆりゆらー大歓喜画像|ゆるゆり画像|ごらく部画像)はよ/i, (msg) ->
-    shuffle = (array) ->
-      i = array.length
-      if i is 0 then return false
-      while --i
-        j = Math.floor Math.random() * (i + 1)
-        tmpi = array[i]
-        tmpj = array[j]
-        array[i] = tmpj
-        array[j] = tmpi
-      return
+  robot.respond /(?:(.+)画像)はよ((?:\uFF01|!){0,})/i, (msg) ->
+    maxCount = 4
+    count = 1
+    if msg.match[1].length > 0
+      if msg.match[1].length <= maxCount
+        count = msg.match[1].length
+      else
+        count = maxCount
+    limitMaxCount = 30
+    limitCount = 1
 
-    file = fs.readFileSync 'config/tumblr.config.yml', 'utf8';
-    config = yaml.safeLoad file
-    index = parseInt Math.random() * config.tumblr.tag.length - 1, 10
-    tag = config.tumblr.tag[index]
-    shuffle config.tumblr.blog
+    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}?apiKey=#{process.env.apikey}"
+    tagList = []
 
-    getImage = (tag, index) ->
-      return unless config.tumblr.blog[index]
-      tumblr.photos(config.tumblr.blog[index] + ".tumblr.com").random { tag: tag }, (post) ->
-        unless post
-          getImage tag, ++index
-        else
+    getConfig = (callback) ->
+      msg.http(url)
+        .get() (err, res, body) ->
+          data = JSON.parse(body)
+          callback data
+
+    getIndex = (list) ->
+      parseInt Math.random() * list.length - 1, 10
+
+    getImage = (config, imgNum) ->
+      return if imgNum >= count || limitCount > limitMaxCount
+      id = config.id[getIndex config.id]
+      tag = config.tag[getIndex config.tag]
+      tumblr.photos(id + ".tumblr.com").random { tag: tag }, (post) ->
+        if post
           msg.send post.photos[0].original_size.url
+          imgNum++
+        limitCount++
+        getImage config, imgNum
 
-    getImage tag, 0
+    getConfig((configList) ->
+      for config in configList
+        if (config.keyword == msg.match[1])
+          getImage config, 1
+    )
