@@ -20,26 +20,34 @@ module.exports = (robot) ->
     limitCount = 1
     imageFound = false
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}"
-    url+= "?apiKey=#{process.env.apikey}&q={\"keyword\":\"" + msg.match[1] + "\"}";
+    url+= "?apiKey=#{process.env.apikey}&q={\"keyword\":\"" + msg.match[1] + "\"}&l=1"
+
+    notFound = () ->
+      msg.send "…画像がみつからないよぉ( ꒪⌓꒪)"
 
     getConfig = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
           if err
-            msg.send "…画像がみつからないよぉ( ꒪⌓꒪)"
+            notFound()
           else
-            callback JSON.parse(body)
+            json = JSON.parse(body)
+            if json.length == 0
+              notFound()
+            else
+              callback json
 
     getIndex = (list) ->
       parseInt Math.random() * list.length - 1, 10
 
     getImage = (config, imgNum) ->
       if imgNum > count || limitCount > limitMaxCount
-        msg.send "…画像がみつからないよぉ( ꒪⌓꒪)" unless imageFound
+        notFound() unless imageFound
         return
 
       id = config.id[getIndex config.id]
       tag = config.tag[getIndex config.tag]
+
       tumblr.photos(id + ".tumblr.com").random { tag: tag }, (post) ->
         if post
           msg.send post.photos[0].original_size.url
