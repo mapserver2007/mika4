@@ -19,7 +19,7 @@ module.exports = (robot) ->
     limitMaxCount = 30
     limitCount = 1
     imageFound = false
-    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collections.tumblr_config}?apiKey=#{process.env.apikey}"
+    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}?apiKey=#{process.env.apikey}"
 
     getConfig = (callback) ->
       msg.http(url)
