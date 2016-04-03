@@ -20,7 +20,7 @@ module.exports = (robot) ->
     limitCount = 1
     imageFound = false
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}"
-    url+= "?apiKey=#{process.env.apikey}&{\"keyword\":\"" + msg.match[1] + "\"}";
+    url+= "?apiKey=#{process.env.apikey}&q={\"keyword\":\"" + msg.match[1] + "\"}";
 
     getConfig = (callback) ->
       msg.http(url)
