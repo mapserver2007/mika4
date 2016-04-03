@@ -11,9 +11,9 @@ module.exports = (robot) ->
     msg.send "ちょっとまってね〜"
     maxCount = 4
     count = 1
-    if msg.match[3]
-      if msg.match[3].length <= maxCount
-        count = msg.match[3].length
+    if msg.match[2]
+      if msg.match[2].length <= maxCount
+        count = msg.match[2].length
       else
         count = maxCount
     limitMaxCount = 30
