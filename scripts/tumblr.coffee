@@ -7,7 +7,7 @@
 tumblr = require "tumblrbot"
 
 module.exports = (robot) ->
-  robot.respond /(?:(.+)画像)はよ((?:\uFF01|!){0,})/i, (msg) ->
+  robot.respond /(?:(.+)画像)(はよ|クレメンス|くれ)((?:\uFF01|!){0,})/i, (msg) ->
     msg.send "ちょっとまってね〜"
     maxCount = 4
     count = 1
