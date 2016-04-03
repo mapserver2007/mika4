@@ -7,7 +7,7 @@
 tumblr = require "tumblrbot"
 
 module.exports = (robot) ->
-  robot.respond /(?:(.+)画像)(はよ|クレメンス|くれ)((?:\uFF01|!){0,})/i, (msg) ->
+  robot.respond /(?:(.+)画像)(?:はよ|クレメンス|くれ)((?:\uFF01|!){0,})/i, (msg) ->
     msg.send "ちょっとまってね〜"
     maxCount = 4
     count = 1
@@ -19,12 +19,16 @@ module.exports = (robot) ->
     limitMaxCount = 30
     limitCount = 1
     imageFound = false
-    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}?apiKey=#{process.env.apikey}"
+    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}"
+    url+= "?apiKey=#{process.env.apikey}&{\"keyword\":\"" + msg.match[1] + "\"}";
 
     getConfig = (callback) ->
       msg.http(url)
         .get() (err, res, body) ->
-          callback JSON.parse(body)
+          if err
+            msg.send "…画像がみつからないよぉ( ꒪⌓꒪)"
+          else
+            callback JSON.parse(body)
 
     getIndex = (list) ->
       parseInt Math.random() * list.length - 1, 10
