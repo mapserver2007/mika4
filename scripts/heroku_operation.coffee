@@ -31,7 +31,7 @@ module.exports = (robot) ->
       subject: "#{msg.match[1]} #{command}"
       text: process.env.TRIGGER_KEY
 
-    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_heroku_operaion}?apiKey=#{process.env.apikey}"
+    url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collections.heroku_operaion}?apiKey=#{process.env.apikey}"
 
     count = 0
     retryCount = 5
