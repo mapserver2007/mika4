@@ -46,7 +46,7 @@ module.exports = (robot) ->
         return
 
       id = config.id[getIndex config.id]
-      tag = config.tag[getIndex config.tag]
+      tag = config.tag
 
       tumblr.photos(id + ".tumblr.com").random { tag: tag }, (post) ->
         if post
