@@ -20,7 +20,7 @@ module.exports = (robot) ->
     limitCount = 1
     imageFound = false
     url = "https://api.mlab.com/api/1/databases/#{process.env.database}/collections/#{process.env.collection_tumblr_config}"
-    url+= "?apiKey=#{process.env.apikey}&q={\"keyword\":\"" + msg.match[1] + "\"}&l=1"
+    url+= "?apiKey=#{process.env.apikey}&q={\"keyword\":\"" + msg.match[1] + "\"}"
 
     notFound = () ->
       msg.send "…画像がみつからないよぉ( ꒪⌓꒪)"
@@ -57,7 +57,7 @@ module.exports = (robot) ->
         getImage config, imgNum
 
     getConfig((configList) ->
-      for config in configList
-        if config.keyword == msg.match[1]
-          getImage config, 1
+      config = configList[getIndex configList]
+      if config.keyword == msg.match[1]
+        getImage config, 1
     )
