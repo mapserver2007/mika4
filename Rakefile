@@ -33,7 +33,7 @@ end
 
 task :heroku_env_clean do
   config.each do |key, value|
-    sh "heroku config:remove #{key}"
+    sh "heroku config:unset #{key}"
   end
 end
 
