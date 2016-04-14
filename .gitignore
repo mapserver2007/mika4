@@ -5,4 +5,4 @@ config/slack.yml
 config/mail.yml
 config/mlab.yml
 config/tumblr.auth.yml
-config/hubot.line.yml
+config/hubot.secret.yml
