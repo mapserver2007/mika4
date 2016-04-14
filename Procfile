@@ -1,1 +1,1 @@
-web: bin/hubot -a line-trial
+web: bin/hubot -a line
