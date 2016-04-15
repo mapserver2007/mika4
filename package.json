@@ -6,7 +6,6 @@
   "description": "mika4 is good at stopping the air.",
   "dependencies": {
     "hubot": "^2.18.0",
-    "hubot-line-trial": "git://github.com/mapserver2007/hubot-line-trial.git",
     "hubot-diagnostics": "0.0.1",
     "hubot-google-images": "^0.2.6",
     "hubot-google-translate": "^0.2.0",
