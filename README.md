@@ -27,10 +27,9 @@ $> bin/hubot --name mika4
 * アカウントおよびルームを作成する
 * [https://slack.com/apps](Browse Apps) > Hubot > Configurations on [your-team] > Edit configuration
 * APIキーを取得する
+* 秘密情報は`config/hubot.secret.yml`に記述する
 
 ## Herokuデプロイ
-SlackのAPIキーをslack.ymlに書いておく。
-
 ```sh
 $> heroku login
 $> heroku create
