@@ -15,6 +15,6 @@ module.exports = (robot) ->
         msg.send text
         if /(\d{2}:\d{2})/.test(text)
           limitTime = new moment(RegExp.$1, "HH:mm").diff(new moment(), "minutes") + 1
-          msg.send "発車まであと#{limitTime}分だよぉ！=͟͟͞͞( ・∀・)"
+          msg.send "あと#{limitTime}分だよぉ！=͟͟͞͞( ・∀・)"
       else
         msg.send "わからない経路だよぉ(>_<)"
