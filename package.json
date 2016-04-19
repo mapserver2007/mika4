@@ -23,7 +23,8 @@
     "nodemailer-smtp-transport": "2.4.1",
     "async": "1.5.2",
     "tumblrbot": "0.1.0",
-    "js-yaml": "3.5.5"
+    "js-yaml": "3.5.5",
+    "moment": "2.13.0"
   },
   "engines": {
     "node": "0.10.x"
