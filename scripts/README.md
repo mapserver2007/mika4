@@ -1,5 +1,5 @@
 # mika-scripts
-[mika4](https://github.com/mapserver2007/mika4)用のスクリプト。
+hubot scripts for [mika4](https://github.com/mapserver2007/mika4).
 
 ## License
 Licensed under the MIT  
