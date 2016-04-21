@@ -16,17 +16,22 @@ module.exports = (robot) ->
       cway = 3 # 終電
       trainType = msg.match[4]
     url = "http://www.jorudan.co.jp/norikae/cgi/nori.cgi?Sok=1&eki1=#{msg.match[1]}&eki2=#{msg.match[2]}&type=t&Cway=#{cway}"
-    console.log url
     msg.http(url).get() (err, res, body) ->
       msg.send "#{trainType}しらべるよぉ"
       if /(■[\s\S]*?■.+)/.test(body)
         text = RegExp.$1
         msg.send text
         if /(\d{2}:\d{2})/.test(text)
-          targetTime = new moment(RegExp.$1, "HH:mm")
-          limitTime = targetTime.diff(new moment(), "minutes") + 1
-          if limitTime < 0
-            limitTime = targetTime.diff(new moment().add(1, "days"), "minutes") + 1441
-          msg.send "あと#{limitTime}分だよぉ！=͟͟͞͞( ・∀・)"
+          next = new moment(RegExp.$1, "HH:mm")
+          current = new moment()
+          limit = next.diff(current, "minutes") + 1
+          if limit < 0
+            if limit < -1440
+              msg.send "今日の電車はもうないよぉ…(´；ω；｀)"
+              return
+            else
+              limit = limit + 1440
+
+          msg.send "あと#{limit}分だよぉ！=͟͟͞͞( ・∀・)"
       else
         msg.send "わからない経路だよぉ(>_<)"
